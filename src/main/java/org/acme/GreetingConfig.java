@@ -1,12 +1,21 @@
 package org.acme;
 
-import io.smallrye.config.ConfigMapping;
-import io.smallrye.config.WithName;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
-@ConfigMapping(prefix = "greeting")
-public interface GreetingConfig {
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-    @WithName("message")
-    String message();
+@Path("/hello")
+public class GreetingConfig {
+    @ConfigProperty(name = "Ifrs.pw2",  defaultValue="" )
+    String message;
 
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello() {
+        return message;
+    }
 }
